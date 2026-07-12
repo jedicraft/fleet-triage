@@ -24,7 +24,8 @@ async function triageAlerts(
   fixture: WebhookFixture,
   options: OrchestratorOptions
 ): Promise<{ results: SubagentTriageResult[]; skipped: SubagentTriageResult[]; riskBefore: number }> {
-  const handled = await loadHandledAlertIds();
+  const handled =
+    options.canvasOnly ? new Set<string>() : await loadHandledAlertIds();
   const pending = fixture.alerts.filter((a) => !handled.has(a.alertId));
   const skipped = fixture.alerts
     .filter((a) => handled.has(a.alertId))

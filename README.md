@@ -96,7 +96,9 @@ npm run setup:repos
 3. Re-run `npm run triage:dry` — show already-handled skips
 4. `rm -rf .triage-state && npm run build && node dist/index.js --mode webhook --fixture scenario-c --dry-run --mock`
 5. `npm run triage:schedule` with `--dry-run --mock` for backlog drain
-6. Live (optional): push repos, then `npm run triage:a` without `--mock`
+6. Live (after org + `npm run setup:repos`):  
+   `rm -rf .triage-state && node dist/index.js --mode webhook --fixture scenario-a --dry-run`  
+   (live agents, no PRs), then drop `--dry-run` for a real PR on cloud repos.
 
 Canvas output defaults to the Round 2 Cursor canvases folder. Override with
 `FLEET_CANVAS_PATH`.

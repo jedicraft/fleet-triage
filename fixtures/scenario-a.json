@@ -1,0 +1,41 @@
+{
+  "id": "fixture-scenario-a",
+  "scenario": "A",
+  "description": "Smoke webhook: portal lodash reachable + monolith yaml not reachable",
+  "delivery": "mock-dependabot-webhook",
+  "createdAt": "2026-07-12T12:00:00Z",
+  "alerts": [
+    {
+      "alertId": "alert-portal-lodash",
+      "repoKey": "portal-api",
+      "source": "dependabot",
+      "severity": "high",
+      "summary": "Prototype pollution via lodash.defaultsDeep",
+      "identifiers": {
+        "cve": ["CVE-2019-10744"],
+        "cwe": ["CWE-1321"]
+      },
+      "dependency": {
+        "name": "lodash",
+        "version": "4.17.11",
+        "ecosystem": "npm",
+        "path": "package.json"
+      }
+    },
+    {
+      "alertId": "alert-mono-yaml",
+      "repoKey": "fulfillment-monolith",
+      "source": "sast",
+      "severity": "high",
+      "summary": "Unsafe yaml.load without SafeLoader",
+      "identifiers": {
+        "cwe": ["CWE-502"]
+      },
+      "pattern": {
+        "name": "unsafe-yaml-load",
+        "language": "python",
+        "component": "fulfillment/utils/deser.py::load_job_config"
+      }
+    }
+  ]
+}

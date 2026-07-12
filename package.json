@@ -1,0 +1,27 @@
+{
+  "name": "fleet-triage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reachability fleet triage orchestrator for TheCakeIsALieInc",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "triage": "node dist/index.js",
+    "triage:a": "node dist/index.js --mode webhook --fixture scenario-a",
+    "triage:b": "node dist/index.js --mode webhook --fixture scenario-b",
+    "triage:schedule": "node dist/index.js --mode schedule",
+    "triage:dry": "node dist/index.js --mode webhook --fixture scenario-b --dry-run --mock",
+    "triage:dry:a": "node dist/index.js --mode webhook --fixture scenario-a --dry-run --mock",
+    "demo:canvas": "node dist/index.js --mode webhook --fixture scenario-b --dry-run --mock --canvas-only",
+    "setup:repos": "node scripts/setup-github-repos.mjs"
+  },
+  "dependencies": {
+    "@cursor/sdk": "^1.0.23",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

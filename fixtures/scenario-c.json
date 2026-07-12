@@ -1,0 +1,54 @@
+{
+  "id": "fixture-scenario-c",
+  "scenario": "C",
+  "description": "Second webhook wave: open-redirect + dead eval + legacy cookie (multi-run demo)",
+  "delivery": "mock-dependabot-webhook",
+  "createdAt": "2026-07-12T18:00:00Z",
+  "alerts": [
+    {
+      "alertId": "alert-portal-redirect",
+      "repoKey": "portal-api",
+      "source": "sast",
+      "severity": "medium",
+      "summary": "Open redirect via next query parameter",
+      "identifiers": {
+        "cwe": ["CWE-601"]
+      },
+      "pattern": {
+        "name": "open-redirect",
+        "language": "typescript",
+        "component": "src/routes/redirect.ts"
+      }
+    },
+    {
+      "alertId": "alert-portal-dead-eval",
+      "repoKey": "portal-api",
+      "source": "sast",
+      "severity": "high",
+      "summary": "Unsafe eval-based token deserialize",
+      "identifiers": {
+        "cwe": ["CWE-95"]
+      },
+      "pattern": {
+        "name": "legacy-token-deserialize",
+        "language": "typescript",
+        "component": "src/utils/deadLegacy.ts::deserializeLegacyToken"
+      }
+    },
+    {
+      "alertId": "alert-legacy-cookie",
+      "repoKey": "benefits-intranet",
+      "source": "sast",
+      "severity": "medium",
+      "summary": "Session cookie missing HttpOnly",
+      "identifiers": {
+        "cwe": ["CWE-1004"]
+      },
+      "pattern": {
+        "name": "weak-session-cookie",
+        "language": "vbscript",
+        "component": "include/auth.asp::SetSessionCookie"
+      }
+    }
+  ]
+}

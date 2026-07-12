@@ -1,0 +1,39 @@
+{
+  "id": "advisory-inbox-pending",
+  "scenario": "schedule",
+  "description": "Scheduled sweep of advisory inbox — findings not yet pushed by webhook (pickle + md5 token)",
+  "delivery": "scheduled-advisory-sweep",
+  "createdAt": "2026-07-12T20:00:00Z",
+  "alerts": [
+    {
+      "alertId": "alert-mono-pickle",
+      "repoKey": "fulfillment-monolith",
+      "source": "sast",
+      "severity": "high",
+      "summary": "pickle.loads in offline cache helper",
+      "identifiers": {
+        "cwe": ["CWE-502"]
+      },
+      "pattern": {
+        "name": "pickle-cache",
+        "language": "python",
+        "component": "fulfillment/utils/cache_pickle.py::load_cache_blob"
+      }
+    },
+    {
+      "alertId": "alert-crypto-md5",
+      "repoKey": "shared-crypto-glados",
+      "source": "sast",
+      "severity": "medium",
+      "summary": "MD5 used for security token helper",
+      "identifiers": {
+        "cwe": ["CWE-328"]
+      },
+      "pattern": {
+        "name": "md5-token",
+        "language": "go",
+        "component": "hmac/token.go::TokenMD5"
+      }
+    }
+  ]
+}

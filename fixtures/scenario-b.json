@@ -1,0 +1,69 @@
+{
+  "id": "fixture-scenario-b",
+  "scenario": "B",
+  "description": "Fleet sweep webhook: one alert per repo covering reachable, not-reachable, legacy human-review, and shared-lib blast radius",
+  "delivery": "mock-dependabot-webhook",
+  "createdAt": "2026-07-12T15:00:00Z",
+  "alerts": [
+    {
+      "alertId": "alert-portal-lodash",
+      "repoKey": "portal-api",
+      "source": "dependabot",
+      "severity": "high",
+      "summary": "Prototype pollution via lodash.defaultsDeep",
+      "identifiers": {
+        "cve": ["CVE-2019-10744"]
+      },
+      "dependency": {
+        "name": "lodash",
+        "version": "4.17.11",
+        "ecosystem": "npm"
+      }
+    },
+    {
+      "alertId": "alert-mono-yaml",
+      "repoKey": "fulfillment-monolith",
+      "source": "sast",
+      "severity": "high",
+      "summary": "Unsafe yaml.load without SafeLoader",
+      "identifiers": {
+        "cwe": ["CWE-502"]
+      },
+      "pattern": {
+        "name": "unsafe-yaml-load",
+        "language": "python",
+        "component": "fulfillment/utils/deser.py::load_job_config"
+      }
+    },
+    {
+      "alertId": "alert-legacy-sqli",
+      "repoKey": "benefits-intranet",
+      "source": "sast",
+      "severity": "critical",
+      "summary": "SQL injection in benefits enrollment form",
+      "identifiers": {
+        "cwe": ["CWE-89"]
+      },
+      "pattern": {
+        "name": "sqli-enrollment",
+        "language": "vbscript",
+        "component": "forms/enroll.asp"
+      }
+    },
+    {
+      "alertId": "alert-crypto-hmac",
+      "repoKey": "shared-crypto-glados",
+      "source": "sast",
+      "severity": "medium",
+      "summary": "Non-constant-time HMAC comparison",
+      "identifiers": {
+        "cwe": ["CWE-208"]
+      },
+      "pattern": {
+        "name": "insecure-hmac-compare",
+        "language": "go",
+        "component": "hmac/hmac.go::Equal"
+      }
+    }
+  ]
+}
